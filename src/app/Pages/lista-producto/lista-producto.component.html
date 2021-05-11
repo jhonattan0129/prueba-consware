@@ -4,7 +4,21 @@
     <div>
       <h2>Lista de Productos</h2>
     </div>
-    <table class="table">
+    <div style="margin-top: 2em;">
+      <form [formGroup]="buscar" >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-8">
+              <input formControlName="nombre" (blur)="buscarPorNombre()" type="text" class="form-control" id="exampleInputPassword1" placeholder="Buscar por Nombre">
+            </div>
+            <div class="col-4">
+              <button type="button" (click)="buscarPorNombre()" class="btn btn-primary">Buscar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <table class="table" style="margin-top: 2em;">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Id</th>

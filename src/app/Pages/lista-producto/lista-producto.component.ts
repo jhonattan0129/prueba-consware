@@ -3,6 +3,7 @@ import request from 'superagent'
 import * as url from '../../../config.js'
 import swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-producto',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class ListaProductoComponent implements OnInit {
 
-  productos: [] = []
+  buscar = new FormGroup({
+    nombre: new FormControl('')
+  })
+  productos= []
+  copiaProductos = []
 
   constructor(private root: Router) { }
 
@@ -22,6 +27,7 @@ export class ListaProductoComponent implements OnInit {
       console.log(response.body)
       this.productos = response.body
       console.log(this.productos)
+      this.copiaProductos = this.productos
     })
     .catch(err => {
       console.log(err)
@@ -50,6 +56,26 @@ export class ListaProductoComponent implements OnInit {
     localStorage.setItem('idProducto', id);
     //console.log(localStorage.getItem('idCliente'))
     this.root.navigateByUrl('editar-producto')
+  }
+  buscarPorNombre() {
+    var arreglo = []    
+    if (this.buscar.value.nombre != "") {      
+      request.get(`${url.variable}/productos`)
+        .then(response => {
+          var resultado = response.body
+          for (let x of resultado) {
+            if (x.Nombre.toUpperCase().includes(this.buscar.value.nombre.toUpperCase())) {
+              arreglo.push(x)            
+            }
+          }
+          this.productos = arreglo
+          for(let w of arreglo){
+            console.log(w)
+          }
+        })
+    }else{
+      this.productos = this.copiaProductos
+    }
   }
 
 }
