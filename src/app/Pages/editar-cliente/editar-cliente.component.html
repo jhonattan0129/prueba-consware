@@ -1,0 +1,26 @@
+<div>
+  <app-nav></app-nav>
+  <div class="container" style="margin-top: 3em;">
+    <form [formGroup]="cliente">
+      <h3>Editar Cliente</h3>
+      <p>Formulario de edición de clientes para inventario virtual</p>
+      <div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Nombre</label>
+          <input formControlName="nombre" type="text"  class="form-control" id="exampleInputPassword1" placeholder="Nombre">
+        </div>
+        <div class="form-group" style="margin-top: 1em;">
+          <label for="exampleInputPassword1">Cedula</label>
+          <input formControlName="cedula" type="number" class="form-control" id="exampleInputPassword1" placeholder="Cedula">
+        </div>
+        <div class="form-group" style="margin-top: 1em;">
+          <label for="exampleInputPassword1">Telefono</label>
+          <input formControlName="telefono" type="number" class="form-control"  id="exampleInputPassword1" placeholder="Telefono">
+        </div>
+        <div style="margin-top: 1.5em;">
+          <button (click)="editarCliente()" type="button" class="btn btn-primary">Editar Cliente</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
